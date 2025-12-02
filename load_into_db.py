@@ -7,14 +7,15 @@ load_dotenv()
 db_user = os.getenv('DB_USER')
 db_password = os.getenv('DB_PASSWORD')
 db_name = os.getenv("DB_NAME")
+db_host = os.getenv("DB_HOST")
 connection_params = {
-    'host': 'localhost',        
+    'host': db_host,        
     'database': db_name,
     'user': db_user,
     'password': db_password,
     'port': 5432
 }
-ENGINE = create_engine(f'postgresql+psycopg2://{db_user}:{db_password}@127.0.0.1:5432/{db_name}')
+ENGINE = create_engine(f'postgresql+psycopg2://{db_user}:{db_password}@{db_host}:5432/{db_name}')
 
 def checkRowCount(table_name, data_source, unique_title):
     query = f"SELECT count(*) FROM {table_name} where data_source='{data_source}'"

@@ -5,6 +5,7 @@ reprocessPublisher, reprocessPhone, reprocessPrice, addCurrencyType, \
 convertEURtoUSD, authorSet, findIds, uniqueUsers, combineIds, fillShippingInfo, \
 extractDate, dailyRevenue
 from load_into_db import loadIntoDB
+from db_init import db_init
 
 
 def reprocessBooksData(data_source):
@@ -65,6 +66,7 @@ def reprocessOrdersData(data_source):
     loadIntoDB(df, table_name='orders', data_source=data_source) 
     
 def startReprocess():
+    db_init()
     if not os.path.exists('static/img'): # render.com free plan requirements
         for data in ['DATA1', 'DATA2', 'DATA3']:
             reprocessBooksData(data_source=data)
