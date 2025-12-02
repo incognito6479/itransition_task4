@@ -18,7 +18,7 @@ def reprocessBooksData(data_source):
     df['publisher'] = reprocessPublisher(df)
     df['data_source'] = data_source
     unique_author_set = authorSet(df)
-    df = df[['title', 'author', 'genre', 'publisher', 'year', 'data_source']]
+    df = df[['id', 'title', 'author', 'genre', 'publisher', 'year', 'data_source']]
     loadIntoDB(df, table_name='books', data_source=data_source)
     df = pd.DataFrame({
         'title': ['unique author set'],

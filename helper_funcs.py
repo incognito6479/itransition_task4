@@ -1,4 +1,4 @@
-import random, re
+import re
 import pandas as pd
 import numpy as np
 from load_into_db import ENGINE

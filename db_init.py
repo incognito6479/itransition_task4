@@ -25,6 +25,7 @@ cur.execute("""
 
 cur.execute("""
     CREATE TABLE IF NOT EXISTS books (
+        id                  BIGINT,
         title               TEXT,
         author              TEXT,
         genre               TEXT,
@@ -59,18 +60,6 @@ cur.execute("""
         currency_type       VARCHAR(3)
     )
 """)
-
-# cur.execute("""
-#     CREATE INDEX IF NOT EXISTS idx_books_data_source ON books (data_source)
-# """)
-
-# cur.execute("""
-#     CREATE INDEX IF NOT EXISTS idx_users_data_source ON users (data_source)
-# """)
-
-# cur.execute("""
-#     CREATE INDEX IF NOT EXISTS idx_orders_data_source ON orders (data_source)
-# """)
 
 cur.close()
 connection.commit()
