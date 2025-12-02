@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 import psycopg2, os 
+from reprocess import startReprocess
 
 
 connection_params = {
@@ -27,6 +28,7 @@ def fetchQuery(query):
 
 @app.route("/")
 def mainPage():
+    startReprocess()
     unique_numbers = fetchQuery('SELECT * from unique_numbers')
     top_revunes_data = fetchQuery("""
         SELECT date, amount, data_source
@@ -64,7 +66,6 @@ def mainPage():
         WHERE rn = 1
         ORDER BY data_source, paid_price DESC           
     """)
-    print(best_buyer)
     context = {
         'unique_numbers': unique_numbers,
         'top_revunes_data': top_revunes_data,

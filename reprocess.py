@@ -1,5 +1,5 @@
 import pandas as pd 
-import yaml, re
+import yaml, re, os
 from helper_funcs import reprocessYear, reprocessTitle, reprocessAuthor, \
 reprocessPublisher, reprocessPhone, reprocessPrice, addCurrencyType, \
 convertEURtoUSD, authorSet, findIds, uniqueUsers, combineIds, fillShippingInfo, \
@@ -64,8 +64,9 @@ def reprocessOrdersData(data_source):
              'timestamp', 'shipping', 'data_source', 'currency_type']]
     loadIntoDB(df, table_name='orders', data_source=data_source) 
     
-
-for data in ['DATA1', 'DATA2', 'DATA3']:
-    reprocessBooksData(data_source=data)
-    reprocessUsersData(data_source=data)
-    reprocessOrdersData(data_source=data)
+def startReprocess():
+    if not os.path.exists('static/img'): # render.com free plan requirements
+        for data in ['DATA1', 'DATA2', 'DATA3']:
+            reprocessBooksData(data_source=data)
+            reprocessUsersData(data_source=data)
+            reprocessOrdersData(data_source=data)
