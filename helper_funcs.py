@@ -1,4 +1,4 @@
-import re
+import re, os
 import pandas as pd
 import numpy as np
 from load_into_db import ENGINE
@@ -33,6 +33,7 @@ MONTHS = {
 }
 
 def dailyRevenue(df, data_source):
+    os.makedirs('static/img', exist_ok=True)
     df.groupby(['timestamp'])['paid_price'].sum().plot(kind='line')
     plt.title('Daily Revenue')
     plt.xlabel('Date')
